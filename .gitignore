@@ -1,3 +1,8 @@
+# Project-related files
+predictions
+backtesting
+causal_graphs
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
