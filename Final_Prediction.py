@@ -63,3 +63,14 @@ if __name__ == '__main__':
     predictions_output_filename = os.path.join(output_directory, f'{market_name}_predictions_{algorithm}_lag_{num_lags}.csv')
     np.savetxt(predictions_output_filename, predictions, delimiter=",", header=",".join(column_names), comments='')
     print('Predictions Saved', market_name, num_lags, algorithm)
+    # predict self
+    summary_matrix = np.eye(data.shape[1])
+    G_self = nx.from_numpy_array(summary_matrix.T, create_using=nx.DiGraph)
+    for u, v, d in G_self.edges(data=True):
+        del d['weight']
+    G_self = nx.relabel_nodes(G_self, lambda x: str(x))
+    print('Making Predictions Self', market_name, num_lags, algorithm)
+    predictions_self = predict_batch(data, num_lags, G_self)
+    predictions_self_output_filename = os.path.join(output_directory, f'{market_name}_predictions_self_{algorithm}_lag_{num_lags}.csv')
+    np.savetxt(predictions_self_output_filename, predictions_self, delimiter=",", header=",".join(column_names), comments='')
+    print('Predictions Self Saved', market_name, num_lags, algorithm)

@@ -4,11 +4,11 @@ import os
 import csv
 import matplotlib.pyplot as plt
 
-def calculate_cumulative_portfolio_returns(data, predictions, num_winners):
+def calculate_annualized_portfolio_returns(data, predictions, num_winners):
     data_backtest = data[-(predictions.shape[0]+1):]
     predicted_returns = (predictions - data_backtest[:-1]) / data_backtest[:-1]
     real_returns = (data_backtest[1:] - data_backtest[:-1]) / data_backtest[:-1]
-    num_stocks = data.shape[1]
+    # num_stocks = data.shape[1]
     # num_winners = int(num_stocks * winner_frac)
     portfolio_returns = []
     winners = np.argpartition(predicted_returns, -num_winners, axis=1)[:, -num_winners:]
@@ -17,10 +17,11 @@ def calculate_cumulative_portfolio_returns(data, predictions, num_winners):
     for i in range(predictions.shape[0]):
         winner_return = np.mean(real_returns[i, winners[i]])
         loser_return = np.mean(real_returns[i, losers[i]])
-        portfolio_return = (winner_return - loser_return)/2
+        portfolio_return = winner_return - loser_return - 0.001
         portfolio_returns.append(portfolio_return)  
     cumulative_portfolio_return = np.exp(np.sum(np.log(np.array(portfolio_returns)+1)))-1
-    return cumulative_portfolio_return, winners, losers, portfolio_returns
+    annualized_return = (1+cumulative_portfolio_return)**(252/predictions.shape[0])-1
+    return annualized_return, winners, losers, portfolio_returns
 
 if __name__ == '__main__':
     if len(sys.argv) < 6:
@@ -39,26 +40,31 @@ if __name__ == '__main__':
 
     data = np.genfromtxt(data_filename, delimiter=',', skip_header=1)
     predictions = np.genfromtxt(predictions_filename, delimiter=',', skip_header=1)
+
+    predictions_self_filename = predictions_filename.replace("_predictions_", "_predictions_self_")
+    predictions_self = np.genfromtxt(predictions_self_filename, delimiter=',', skip_header=1)
     
     # backtest
     print('Backtesting', market_name, num_lags, algorithm)
     # frac = np.arange(0.01, 0.5, step=0.01)
     n_winners_range = np.arange(1, max(int(0.2*data.shape[1]), 5))
     # print(n_winners_range)
-    cpr = [calculate_cumulative_portfolio_returns(data, predictions, f)[0] for f in n_winners_range]
+    ar = [calculate_annualized_portfolio_returns(data, predictions, f)[0] for f in n_winners_range]
+    ar_self = [calculate_annualized_portfolio_returns(data, predictions_self, f)[0] for f in n_winners_range]
     backtest_output_filename = os.path.join(output_directory, f'{market_name}_backtest_returns_{algorithm}_lag_{num_lags}.csv')
-    backtest_returns = np.column_stack((n_winners_range, cpr))
+    backtest_returns = np.column_stack((n_winners_range, ar, ar_self))
     with open(backtest_output_filename, mode='w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(['winner_num', 'cpr'])
+        writer.writerow(['winner_num', 'ar', 'ar_self'])
         writer.writerows(backtest_returns)
     print('Backtest Returns Saved', market_name, num_lags, algorithm)
 
-    plt.plot(n_winners_range, cpr)
+    plt.plot(n_winners_range, ar, label="causal discovery", color="blue")
+    plt.plot(n_winners_range, ar_self, label="self cause only", color="red")
     # plot_title = f'{market_name}_{algorithm}_lag_{num_lags}'
     # plt.title(plot_title)
     plt.xlabel("Number of Winners/Losers")
-    plt.ylabel("Cumulative Portfolio Return")
+    plt.ylabel("Annualized Portfolio Return")
     backtest_plot_filename = os.path.join(output_directory, f'{market_name}_backtest_returns_plot_{algorithm}_lag_{num_lags}.png')
     plt.savefig(backtest_plot_filename)
     print('Backtest Returns Plot Saved', market_name, num_lags, algorithm)
@@ -66,7 +72,7 @@ if __name__ == '__main__':
     winner_filename = os.path.join(output_directory, f'{market_name}_{test_winner_num}_winners_{algorithm}_lag_{num_lags}.csv')
     loser_filename = os.path.join(output_directory, f'{market_name}_{test_winner_num}_losers_{algorithm}_lag_{num_lags}.csv')
     daily_port_return_filename = os.path.join(output_directory, f'{market_name}_daily_portfolio_returns_{test_winner_num}_{algorithm}_lag_{num_lags}.csv')
-    _,winners,losers,daily_port_returns = calculate_cumulative_portfolio_returns(data, predictions, test_winner_num)
+    _,winners,losers,daily_port_returns = calculate_annualized_portfolio_returns(data, predictions, test_winner_num)
     with open(winner_filename, 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerows(winners)
