@@ -1,0 +1,35 @@
+digraph G {
+  center = 1;
+  size = "10, 10";
+  splines = true;
+  sep = 1;
+ 1 [pos = "100.000000,1800.000000", label = "1", style = "solid", pin = true];
+ 2 [pos = "100.000000,1650.000000", label = "2", style = "solid", pin = true];
+ 3 [pos = "100.000000,1500.000000", label = "3", style = "solid", pin = true];
+ 4 [pos = "300.000000,1800.000000", label = "4", style = "solid", pin = true];
+ 5 [pos = "300.000000,1650.000000", label = "5", style = "solid", pin = true];
+ 6 [pos = "300.000000,1500.000000", label = "6", style = "solid", pin = true];
+ 7 [pos = "500.000000,1800.000000", label = "7", style = "solid", pin = true];
+ 8 [pos = "500.000000,1650.000000", label = "8", style = "solid", pin = true];
+ 9 [pos = "500.000000,1500.000000", label = "9", style = "solid", pin = true];
+ 10 [pos = "700.000000,1800.000000", label = "10", style = "solid", pin = true];
+ 11 [pos = "700.000000,1650.000000", label = "11", style = "solid", pin = true];
+ 12 [pos = "700.000000,1500.000000", label = "12", style = "solid", pin = true];
+  1 -> 2 [style = solid, color = black, arrowtail = normal, arrowhead = normal];
+  2 -> 3 [style = solid, color = black, arrowtail = normal, arrowhead = normal];
+  1 -> 4 [style = solid, color = black, arrowtail = odot, arrowhead = normal];
+  1 -> 5 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+  2 -> 5 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+  2 -> 6 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+  3 -> 6 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+  4 -> 7 [style = solid, color = black, arrowtail = odot, arrowhead = normal];
+  4 -> 8 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+  5 -> 8 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+  1 -> 9 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+  6 -> 9 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+  7 -> 10 [style = solid, color = black, arrowtail = odot, arrowhead = normal];
+  7 -> 11 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+  8 -> 11 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+  4 -> 12 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+  9 -> 12 [style = solid, color = black, arrowtail = none, arrowhead = normal];
+}

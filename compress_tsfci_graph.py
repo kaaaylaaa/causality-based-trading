@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 import os
+import sys
 
 def string_nodes(nodes):
     new_nodes = []
@@ -73,21 +74,26 @@ def tgraph_to_graph(tg):
 
 
 
-nlags = 5
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print('Usage: result_filename num_lags')
+        exit()
+        
+    output_directory = "./causal_graphs"
+    os.makedirs(output_directory, exist_ok=True)
 
-# data = pd.read_csv('./data/Cleaned_nancy_data.csv', delimiter=',', index_col=False, header=0)
-# col_num = data.shape[1]
-# nodes = [i for i in range(col_num)]
+    result_filename = sys.argv[1]
+    num_lags = int(sys.argv[2])
 
-nodes = [i for i in range(5)]
-tsfci_result_df = pd.read_csv('tsfci_result_1.csv', header=0, index_col=0)
 
-tsfci_dict = ts_fci_dataframe_to_dict(tsfci_result_df, nodes, nlags)
-tsfci_tgraph = dict_to_tgraph(nodes, tsfci_dict)
-G, _ = tgraph_to_graph(tsfci_tgraph)
+    data = pd.read_csv('./data/Cleaned_nancy_data.csv', delimiter=',', index_col=False, header=0)
+    nodes = [i for i in range(data.shape[1])]
 
-output_directory = "./causal_graphs"
-market_name = 'nancy'
-num_lags = nlags-1
-output_filename = os.path.join(output_directory, f'{market_name}_graph_tsfci_lag_{num_lags}.txt')
-nx.write_adjlist(G, output_filename)
+    tsfci_result_df = pd.read_csv(result_filename, header=0, index_col=0)
+
+    tsfci_dict = ts_fci_dataframe_to_dict(tsfci_result_df, nodes, num_lags+1)
+    tsfci_tgraph = dict_to_tgraph(nodes, tsfci_dict)
+    G, _ = tgraph_to_graph(tsfci_tgraph)
+
+    output_filename = os.path.join(output_directory, f'nancy_graph_tsfci_lag_{num_lags}.txt')
+    nx.write_adjlist(G, output_filename)
