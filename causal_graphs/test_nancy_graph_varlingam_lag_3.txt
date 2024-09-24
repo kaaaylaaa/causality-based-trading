@@ -1,0 +1,15 @@
+#causal_discovery_varlingam.py data/Cleaned_nancy_data.csv 3 test_nancy varlingam 5
+# GMT Sat Aug 31 08:25:10 2024
+# 
+0 0 10
+1 0 1 2 8
+2 0 2
+3 0 1 2 3 4 6 7 8 10
+4 0 1 2 4 6
+5 0 1 2 4 5 9
+6 0 5 6 7 9 11
+7 2 5 7 9 11
+8 2 4 5 6 7 8 9
+9 1 9
+10 0 2 5 6 7 8 10 11
+11 8 9 11
