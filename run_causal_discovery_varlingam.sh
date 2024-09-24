@@ -13,6 +13,9 @@
 # python causal_discovery_varlingam.py data/csi-300-80.csv 4 csi300 varlingam
 # python causal_discovery_varlingam.py data/csi-300-80.csv 5 csi300 varlingam
 # python causal_discovery_varlingam.py data/csi-300-80.csv 6 csi300 varlingam
-python causal_discovery_varlingam.py data/Cleaned_SP500_Data_latest.csv 1 latest_sp500 varlingam
-python causal_discovery_varlingam.py data/Cleaned_SP500_Data_latest.csv 2 latest_sp500 varlingam
-python causal_discovery_varlingam.py data/Cleaned_SP500_Data_latest.csv 3 latest_sp500 varlingam
+# python causal_discovery_varlingam.py data/Cleaned_SP500_Data_latest.csv 1 latest_sp500 varlingam 5
+# python causal_discovery_varlingam.py data/Cleaned_SP500_Data_latest.csv 2 latest_sp500 varlingam 5
+# python causal_discovery_varlingam.py data/Cleaned_SP500_Data_latest.csv 3 latest_sp500 varlingam 5
+python causal_discovery_varlingam.py data/Cleaned_SP500_Data_latest_return.csv 1 latest_sp500_return varlingam 5
+python causal_discovery_varlingam.py data/Cleaned_SP500_Data_latest_return.csv 2 latest_sp500_return varlingam 5
+python causal_discovery_varlingam.py data/Cleaned_SP500_Data_latest_return.csv 3 latest_sp500_return varlingam 5
