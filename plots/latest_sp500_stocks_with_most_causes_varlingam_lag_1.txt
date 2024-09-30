@@ -1,0 +1,11 @@
+Top 10 stocks with the most causes:
+Node CCL: 3 causes ['XEL', 'DAL', 'SPG']
+Node PODD: 3 causes ['NEE', 'DUK', 'BLK']
+Node MOS: 3 causes ['DTE', 'CF', 'CMS']
+Node SLB: 3 causes ['OXY', 'SO', 'BLK']
+Node APA: 3 causes ['OXY', 'MRO', 'PEP']
+Node FANG: 2 causes ['OXY', 'SLB']
+Node CMS: 2 causes ['XEL', 'WEC']
+Node UDR: 2 causes ['ESS', 'AVB']
+Node AWK: 2 causes ['XEL', 'ES']
+Node RCL: 2 causes ['CCL', 'NCLH']

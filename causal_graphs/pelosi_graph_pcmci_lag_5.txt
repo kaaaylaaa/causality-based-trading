@@ -1,0 +1,15 @@
+#causal_discovery_pcmci.py data/pelosi_return_80.csv 5 pelosi pcmci
+# GMT Sun Sep 29 13:06:37 2024
+# 
+0 0 2 7 10 11
+1 1 4
+2 2 5 7 8
+3 3
+4 4 0 1 2 3 5 6 8 9
+5 5 10
+6 6 3
+7 7 1 8 11
+8 8 2 9 10
+9 9 1 5
+10 10 0 1 5 7 8 9
+11 11

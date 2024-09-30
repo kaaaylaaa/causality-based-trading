@@ -1,0 +1,11 @@
+Top 10 stocks with the most effects:
+Node PEP: 9 effects ['BLK', 'XEL', 'KO', 'FSLR', 'MNST', 'KDP', 'MO', 'CL', 'APA']
+Node BLK: 9 effects ['OXY', 'PODD', 'NUE', 'FCX', 'ANSS', 'IVZ', 'TROW', 'REGN', 'SLB']
+Node TXN: 6 effects ['AMD', 'NXPI', 'MCHP', 'INTC', 'ADI', 'TER']
+Node XEL: 6 effects ['ES', 'WEC', 'AWK', 'AEP', 'CCL', 'CMS']
+Node ANSS: 5 effects ['ADSK', 'EPAM', 'MSCI', 'LRCX', 'MSFT']
+Node PNC: 5 effects ['RF', 'SCHW', 'USB', 'NEM', 'RJF']
+Node LRCX: 5 effects ['KLAC', 'AMAT', 'TER', 'TXN', 'MU']
+Node DTE: 4 effects ['MOS', 'SPG', 'ALB', 'CNP']
+Node DAL: 4 effects ['UAL', 'LUV', 'AAL', 'CCL']
+Node TMO: 3 effects ['RVTY', 'DHR', 'BIO']

@@ -75,8 +75,8 @@ def tgraph_to_graph(tg):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print('Usage: result_filename num_lags')
+    if len(sys.argv) < 4:
+        print('Usage: result_filename num_lags data_filename market_name')
         exit()
         
     output_directory = "./causal_graphs"
@@ -84,9 +84,9 @@ if __name__ == '__main__':
 
     result_filename = sys.argv[1]
     num_lags = int(sys.argv[2])
-
-
-    data = pd.read_csv('./data/Cleaned_nancy_data.csv', delimiter=',', index_col=False, header=0)
+    data_filename = sys.argv[3]
+    market_name = sys.argv[4]
+    data = pd.read_csv(data_filename, delimiter=',', index_col=False, header=0)
     nodes = [i for i in range(data.shape[1])]
 
     tsfci_result_df = pd.read_csv(result_filename, header=0, index_col=0)
@@ -95,5 +95,5 @@ if __name__ == '__main__':
     tsfci_tgraph = dict_to_tgraph(nodes, tsfci_dict)
     G, _ = tgraph_to_graph(tsfci_tgraph)
 
-    output_filename = os.path.join(output_directory, f'nancy_graph_tsfci_lag_{num_lags}.txt')
+    output_filename = os.path.join(output_directory, f'{market_name}_graph_tsfci_lag_{num_lags}.txt')
     nx.write_adjlist(G, output_filename)
