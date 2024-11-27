@@ -6,3 +6,6 @@
 * `tsFCI-modified/nancy_causal.R`: causal discovery script running all data sets with tsFCI
 * `run_causal_discovery_timino.R`: causal discovery script running all data sets with TiMINo
 * `explore_data.ipynb`: data exploration routines and prototype functions
+
+## Research Paper
+* preprint: https://arxiv.org/abs/2408.15846
